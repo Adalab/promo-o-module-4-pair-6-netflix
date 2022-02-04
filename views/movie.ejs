@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://localhost:4000/main.css">
     <title>Ejercicio -netflix Pair 6</title>
 </head>
+
 <body>
     <header>
-        <h1>Ole, ole, los caracole</h1>
+        <h1 class="mainTitle">Ole, ole, los caracole</h1>
     </header>
-    <main>
-        <p>Identificador: <%= id %></p>
-        <p>Nombre de la película: <%= title %></p>
-        <p>Género: <%= gender %></p>
-        <img src=<%= image %> alt="Imagen de la película <%= title %>" />
+    <main class="main">
+        <p>Identificador: <%= id %>
+        </p>
+        <p>Nombre de la película: <%= title %>
+        </p>
+        <p>Género: <%= gender %>
+        </p>
+        <img src=<%=image %> alt="Imagen de la película <%= title %>" />
     </main>
 </body>
+
 </html>

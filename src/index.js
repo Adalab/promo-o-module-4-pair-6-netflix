@@ -17,6 +17,8 @@ server.listen(serverPort, () => {
 //servidor de estáticos para las imágenes 
 const staticServerPathImg = "./web/src/public-movies-images/";
 server.use(express.static(staticServerPathImg));
+const staticServerPathStyles = "./web/src/stylesheets/";
+server.use(express.static(staticServerPathStyles));
 
 //escribimos los endpoints
 server.get("/movies", (req, res) => {
