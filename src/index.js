@@ -7,16 +7,14 @@ const users = require("./data/users.json");
 const server = express();
 server.use(cors());
 server.use(express.json());
+server.set('view engine', 'ejs');
 
 // init express aplication
 const serverPort = 4000;
 server.listen(serverPort, () => {
   console.log(`Server listening at http://localhost:${serverPort}`);
 });
-
-//servidor de estáticos
-const staticServerPath = "./web/public";
-server.use(express.static(staticServerPath));
+//servidor de estáticos para las imágenes 
 const staticServerPathImg = "./web/src/public-movies-images/";
 server.use(express.static(staticServerPathImg));
 
@@ -51,3 +49,17 @@ server.post("/login", (req, res) => {
     });
   }
 });
+
+server.get('/movie/:movieId', (req, res) => { 
+  const urlParams =req.params.movieId;
+  const foundMovie = movies.find( movie => movie.id === urlParams) 
+  if (!foundMovie.title){
+    foundMovie.title = "";
+  }
+  // no hace falta else porque si existe, nos devuelve el valor que toca
+  console.log(foundMovie);
+  res.render('movie', foundMovie);
+});
+//servidor de estáticos
+const staticServerPath = "./web/public";
+server.use(express.static(staticServerPath));
