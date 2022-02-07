@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const movies = require("./data/movies.json");
 const users = require("./data/users.json");
+const Database = require("better-sqlite3");
 
 // create and config server
 const server = express();
@@ -20,12 +21,23 @@ server.use(express.static(staticServerPathImg));
 const staticServerPathStyles = "./web/src/stylesheets/";
 server.use(express.static(staticServerPathStyles));
 
+// Base de datos 
+const db = new Database('./src/db/database.db', {verbose: console.log});
+
 //escribimos los endpoints
 server.get("/movies", (req, res) => {
+  let movies = [];
+  const query = db.prepare('SELECT * FROM movies WHERE gender= ? ORDER BY title DESC ');
+  const queryAll = db.prepare('SELECT * FROM movies ORDER BY title DESC ');
+  if (req.query.gender === ''){
+    movies = queryAll.all();
+  } else {
+    movies = query.all(req.query.gender);
+  }
   const response = {
     success: true,
     movies: movies,
-  };
+  }; 
   res.json(response);
 });
 
