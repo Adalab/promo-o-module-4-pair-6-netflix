@@ -1,8 +1,8 @@
 const express = require("express");
 const cors = require("cors");
-const movies = require("./data/movies.json");
-const users = require("./data/users.json");
 const Database = require("better-sqlite3");
+// const movies = require("./data/movies.json");
+// const users = require("./data/users.json");
 
 // create and config server
 const server = express();
@@ -15,10 +15,10 @@ const serverPort = 4000;
 server.listen(serverPort, () => {
   console.log(`Server listening at http://localhost:${serverPort}`);
 });
-//servidor de estáticos para las imágenes
-const staticServerPathImg = "./web/src/public-movies-images/";
+//servidor de estáticos para las imágenes y estilos
+const staticServerPathImg = "./src/public-movies-images/";
 server.use(express.static(staticServerPathImg));
-const staticServerPathStyles = "./web/src/stylesheets/";
+const staticServerPathStyles = "./src/public-css";
 server.use(express.static(staticServerPathStyles));
 
 // Base de datos
@@ -30,9 +30,11 @@ server.get("/movies", (req, res) => {
   const query = db.prepare(
     "SELECT * FROM movies WHERE gender= ? ORDER BY title DESC "
   );
-  const queryAll = db.prepare("SELECT * FROM movies ORDER BY title DESC ");
+  const queryAllMovies = db.prepare(
+    "SELECT * FROM movies ORDER BY title DESC "
+  );
   if (req.query.gender === "") {
-    movies = queryAll.all();
+    movies = queryAllMovies.all();
   } else {
     movies = query.all(req.query.gender);
   }
@@ -66,13 +68,10 @@ server.post("/login", (req, res) => {
 });
 
 server.get("/movie/:movieId", (req, res) => {
-  const urlParams = req.params.movieId;
-  const foundMovie = movies.find((movie) => movie.id === urlParams);
-  if (!foundMovie.title) {
-    foundMovie.title = "";
-  }
-  // no hace falta else porque si existe, nos devuelve el valor que toca
-  console.log(foundMovie);
+  const movieId = req.params.movieId;
+  const query = db.prepare("SELECT * FROM movies WHERE id=?");
+  const foundMovie = query.get(movieId);
+
   res.render("movie", foundMovie);
 });
 
@@ -107,9 +106,9 @@ server.post("/user/profile", (req, res) => {
   const userId = req.headers.userid;
 
   const query = db.prepare(
-    "UPDATE users SET email=?, password=? WHERE userId=?"
+    "UPDATE users SET email=?, password=?, name=? WHERE userId=?"
   );
-  const userUpdate = query.run(email, password, userId);
+  const userUpdate = query.run(email, password, name, userId);
 
   if (userUpdate.changes !== 0) {
     res.json({
@@ -132,32 +131,25 @@ server.get("/user/profile", (req, res) => {
     success: true,
     email: getProf.email,
     password: getProf.password,
+    name: getProf.name,
   });
 });
-
-// Anterior query user/movies.
-// server.get("/user/movies", (req, res)=> {
-//const userId = req.headers.userid;
-//  const query = db.prepare("SELECT movieId FROM rel_movies_users WHERE userId = ?");
-//  const foundMovies = query.all(userId);
-//  console.log(foundMovies);
-//    res.json({
-//      "success": true,
-//      "movies": []
-//    }) })
 
 server.get("/user/movies", (req, res) => {
   // preparamos la query para obtener los movieIds
   const movieIdsQuery = db.prepare(
     "SELECT movieId FROM rel_movies_users WHERE userId = ?"
   );
+
   // obtenemos el id de la usuaria
   const userId = req.headers.userid;
+
   // ejecutamos la query
   const movieIds = movieIdsQuery.all(userId); // que nos devuelve algo como [{ movieId: 1 }, { movieId: 2 }];
 
   // obtenemos las interrogaciones separadas por comas
   const moviesIdsQuestions = movieIds.map((id) => "?").join(", "); // que nos devuelve '?, ?'
+
   // preparamos la segunda query para obtener todos los datos de las películas
   const moviesQuery = db.prepare(
     `SELECT * FROM movies WHERE id IN (${moviesIdsQuestions})`
@@ -165,6 +157,7 @@ server.get("/user/movies", (req, res) => {
 
   // convertimos el array de objetos de id anterior a un array de números
   const moviesIdsNumbers = movieIds.map((movie) => movie.movieId); // que nos devuelve [1.0, 2.0]
+
   // ejecutamos segunda la query
   const movies = moviesQuery.all(moviesIdsNumbers);
 
@@ -178,3 +171,14 @@ server.get("/user/movies", (req, res) => {
 //servidor de estáticos
 const staticServerPath = "./web/public";
 server.use(express.static(staticServerPath));
+
+// Anterior query user/movies.
+// server.get("/user/movies", (req, res)=> {
+//const userId = req.headers.userid;
+//  const query = db.prepare("SELECT movieId FROM rel_movies_users WHERE userId = ?");
+//  const foundMovies = query.all(userId);
+//  console.log(foundMovies);
+//    res.json({
+//      "success": true,
+//      "movies": []
+//    }) })
