@@ -100,8 +100,6 @@ server.post("/sign-up", (req, res) => {
   }
 });
 
-
-// REVISAR PARA COMPLETAR EJERCICIO 5, 4.6. No llega ningun id que permita modificar los datos.
 server.post("/user/profile", (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
