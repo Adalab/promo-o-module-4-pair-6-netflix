@@ -169,7 +169,7 @@ server.get("/user/movies", (req, res) => {
 });
 
 //servidor de estáticos
-const staticServerPath = "./web/public";
+const staticServerPath = "./src/public-react";
 server.use(express.static(staticServerPath));
 
 // Anterior query user/movies.
