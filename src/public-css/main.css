@@ -7,9 +7,14 @@
 
 .main {
   background-color: lightblue;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .mainTitle {
-  background-color: gray;
+  background-color: lightgrey;
   color: white;
+  font-size: 30px;
+  padding: 15px;
 }
