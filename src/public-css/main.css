@@ -18,3 +18,11 @@
   font-size: 30px;
   padding: 15px;
 }
+
+.link {
+  color: red;
+  padding: 10px;
+}
+.text {
+  margin-top: 10px;
+}
