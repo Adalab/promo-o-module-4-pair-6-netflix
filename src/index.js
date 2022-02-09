@@ -46,16 +46,15 @@ server.get("/movies", (req, res) => {
 server.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  //const userId =  users.map((user) => user.id);
 
-  if (
-    users.find((user) => user.email === email && user.password === password)
-  ) {
+  const query = db.prepare("SELECT * FROM users WHERE email=? and password=?");
+  const userLog = query.get(email, password)
+
+  if(userLog !== undefined) {
     console.log("Inicio de sesión correcto");
-    //console.log(userId);
     res.json({
       success: true,
-      userId: email,
+      userId: userLog.userId,
     });
   } else {
     res.status(404);
@@ -95,35 +94,48 @@ server.post("/sign-up", (req, res) => {
     });
   } else {
     res.json({
-      error: true,
+      success: false,
       errorMessage: "el usuario ya existe",
     });
   }
 });
 
 
-// REVISAR PARA COMPLETAR EJERCICIO 5, 4.6
-server.post("/profile", (req, res) => {
+// REVISAR PARA COMPLETAR EJERCICIO 5, 4.6. No llega ningun id que permita modificar los datos.
+server.post("/user/profile", (req, res) => {
+  const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
-  const userId = req.headers('user-id');
+  const userId = req.headers.userid;
 
-const query =  db.prepare("UPDATE users SET email=?, password=? WHERE userId=?");
-const userUpdate = query.run(email,password);
+const query = db.prepare("UPDATE users SET email=?, password=? WHERE userId=?");
+const userUpdate = query.run(email, password, userId);
 
 if(userUpdate.changes !== 0) {
   res.json({
-    error: false,
+    success: true,
     message: "modificado con exito"
   })
 } else {
   res.json ({
-    error: true, 
+    success: false, 
     message: "ha ocurrido un error"
   })
-}
-  
+} 
 })
+
+
+server.get("/user/profile", (req, res) => {
+
+  const query = db.prepare("SELECT * FROM users WHERE userId=?");
+  const getProf = query.get(req.headers.userid);
+
+  res.json({
+    success:true,
+    email:getProf.email,
+    password: getProf.password
+  })
+ })
 
 //servidor de estáticos
 const staticServerPath = "./web/public";
