@@ -1,6 +1,7 @@
 # Netflix Exercise
 
-Simple Netflix App Made with React, Node JS y SQL.
+- Simple Netflix App Made with React, Node JS y SQL.
+- <div align="center"> <img src="./web/images/previous.png" width="400px"</img> </div>
 
 ### How to start the backend
 
@@ -19,6 +20,13 @@ At the root of the project:
 1. Run `npm install`.
 1. Run `npm start` or `npm run dev`.
 1. Open the page http://localhost:3000
+
+## To Do
+
+- Styles with CSS.
+- Filter by gender and sort by name.
+- Keep the user logged in.
+- Review code.
 
 ## Functions completed
 
