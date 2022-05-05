@@ -24,6 +24,7 @@ At the root of the project:
 ## To Do
 
 - Styles with CSS.
+- Change fetch with update express server and deploy on Heroku.
 - Filter by gender and sort by name.
 - Keep the user logged in.
 - Review code.
