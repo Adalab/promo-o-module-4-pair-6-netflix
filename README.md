@@ -1,80 +1,80 @@
-# Ejercicio de Netflix
+# Netflix Exercise
 
-### Cómo arrancar el backend
+Simple Netflix App Made with React, Node JS y SQL.
 
-En la raíz del proyecto:
+### How to start the backend
 
-1. Ejecutar `npm install`.
-1. Ejecutar `npm start` o `npm run dev`.
+At the root of the project:
 
-El backend se arrancará en http://localhost:4000
+1. Run `npm install`.
+1. Run `npm start` or `npm run dev`.
 
-### Cómo ejecutar el frontend
+The backend will start at http://localhost:4000
 
-En la raíz del proyecto:
+### How to run the frontend
 
-1. Ejecutar `cd web`.
-1. Ejecutar `npm install`.
-1. Ejecutar `npm start` o `npm run dev`.
-1. Abrir la página http://localhost:3000
+At the root of the project:
 
-## ¿Cuántos ejercicios hemos hecho?
+1. Run `cd web`.
+1. Run `npm install`.
+1. Run `npm start` or `npm run dev`.
+1. Open the page http://localhost:3000
 
-Por favor marca a continuación los ejericios que hayais terminado:
+## Functions completed
 
-4.1 Node JS:
+4.1 NodeJS:
 
-- [x] 1. Crea el proyecto
-- [x] 2. Arranca el backend
-- [x] 3. Arranca el front end
-- [x] 4. Prueba el proyecto
-- [x] 5. Entiende el código del proyecto
+- [x] 1. Create the project
+- [x] 2. Start the backend
+- [x] 3. Start the front end
+- [x] 4. Test the project
+- [x] 5. Understand the project code
 
-  4.2 Express JS I:
+  4.2 ExpressJS I:
 
-- [x] 1. Pedir todas las películas
-- [ ] 2. Filtrar por género
-- [ ] 3. Ordenar por nombre
+- [x] 1. Request all movies
+- [ ] 2. Filter by genre
+- [ ] 3. Sort by name
 
-  4.3 Express JS II:
+  4.3 ExpressJS II:
 
-- [x] 1. Servidor de estáticos para React
-- [x] 2. Servidor de estáticos para las fotos
-- [x] 3. Peticiones POST con body params
-- [ ] 4. Mantener logada a la usuaria
+- [x] 1. Static server for React
+- [x] 2. Static server for photos
+- [x] 3. POST requests with body params
+- [ ] 4. Keep the user logged in
 
-  4.4 Express JS III:
+  4.4 ExpressJSIII:
 
-- [x] 1. Obtener el id de la película a renderizar
-- [x] 2. Obtener la película
-- [x] 3. Renderiza una página cualquiera
-- [x] 4. Renderiza la película
-- [x] 5. Añade estilos
+- [x] 1. Get the id of the movie to render
+- [x] 2. Get the movie
+- [x] 3. Render any page
+- [x] 4. Render the movie
+- [x] 5. Add styles
 
-  4.5 Bases de datos I:
+  4.5 Databases I:
 
-- [x] 1. Crear la base de datos
-- [x] 2. Configura la base de datos en Node JS
-- [x] 3. Haz un SELECT para obtener todas películas
-- [x] 4. Mejora tu SELECT
-- [x] 5. SELECT para el motor de plantillas
-- [x] 6. Crear la tabla de usuarias
+- [x] 1. Create the database
+- [x] 2. Configure the database in Node JS
+- [x] 3. Do a SELECT to get all movies
+- [x] 4. Improve your SELECT
+- [x] 5. SELECT for template engine
+- [x] 6. Create the user table
 
-  4.6 Bases de datos I:
+  4.6 Databases I:
 
-- [x] 1. Registro de nuevas usuarias en el front
-- [x] 2. Registro de nuevas usuarias en el back
-- [x] 3. Comprueba que no haya una usuaria registrada con el mismo email
-- [x] 4. Actualiza el perfil de la usuaria en el front
-- [x] 5. Actualiza el perfil de la usuaria en el back
-- [x] 6. Recupera los datos del perfil de la usuaria desde el front
-- [x] 7. Recupera los datos del perfil de la usuaria desde el back
+- [x] 1. Registration of new users in the front
+- [x] 2. Registration of new users in the back
+- [x] 3. Check that there is not a registered user with the same email
+- [x] 4. Update the user's profile in the front
+- [x] 5. Update the user's profile in the back
+- [x] 6. Retrieve the user's profile data from the front
+- [x] 7. Retrieve the user's profile data from the back
 
-  4.7 Bases de datos I:
+  4.7 Databases I:
 
-- [x] 1. Pensar qué relación es
-- [x] 2. Crear una relación N a N
-- [x] 3. Crear el endpoint en el front
-- [x] 4. Crear el endpoint en el back
-- [x] 5. Obtener los ids de las películas de la usuaria
-- [x] 6. Obtener todos los datos de las películas de la usuaria
+- [x] 1. Think what relationship is
+- [x] 2. Create an N to N relation
+- [x] 3. Create the endpoint in the front
+- [x] 4. Create the endpoint in the back
+- [x] 5. Get the ids of the user's movies
+- [x] 6. Get all the data of the user's movies
